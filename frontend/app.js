@@ -150,7 +150,11 @@ function addTranscriptBubble(role, text) {
 
   const avatar = document.createElement("div");
   avatar.className = "avatar";
-  avatar.textContent = role === "user" ? "🧑" : "🤖";
+  if (role === "user") {
+    avatar.textContent = "🧑";
+  } else {
+    avatar.innerHTML = `<img src="sage.png" alt="Sage" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;" />`;
+  }
 
   const inner = document.createElement("div");
   inner.style.display = "flex";
