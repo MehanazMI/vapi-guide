@@ -5,7 +5,7 @@
 // Config — update these after running scripts/setup_assistant.py
 // ---------------------------------------------------------------------------
 const VAPI_PUBLIC_KEY  = "fb3dac03-f0ee-4b77-8bd6-3f069f5e5774";
-const ASSISTANT_ID     = "";   // ← paste the ID printed by setup_assistant.py
+const ASSISTANT_ID     = "95da9243-2a6a-4a02-96e1-0af8ed97d456";
 
 // ---------------------------------------------------------------------------
 // UI Elements
