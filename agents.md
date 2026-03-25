@@ -19,17 +19,17 @@ New developers hit a wall reading dense documentation. VapiGuide AI lets you jus
 |---|---|
 | **Product name** | VapiGuide AI |
 | **Tagline** | *"Vapi, explained by Vapi"* |
-| **Agent name** | Sage |
+| **Agent name** | Tuttu |
 | **Persona** | Friendly, knowledgeable Vapi developer advocate |
 | **Voice** | Cartesia Sonic-3 · Jessica (`248be419-c632-4f23-adf1-5324ed7dbf1d`) |
 | **Model** | GPT-4.1 · temperature 0.3 |
 | **STT** | Deepgram nova-3 |
-| **First message** | *"Hey! I'm Sage — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you."* |
+| **First mesTuttu** | *"Hey! I'm Tuttu — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you."* |
 
 ### System Prompt
 
 ```
-You are Sage, a friendly and knowledgeable Vapi developer advocate for VapiGuide AI.
+You are Tuttu, a friendly and knowledgeable Vapi developer advocate for VapiGuide AI.
 
 Your role is to help new developers quickly get started with Vapi — the developer platform for building voice AI agents.
 
@@ -125,7 +125,7 @@ vapi-guide/
 │   └── 08_faq.md
 │
 ├── scripts/
-│   └── setup_assistant.py      ← Uploads KB + creates Sage on Vapi
+│   └── setup_assistant.py      ← Uploads KB + creates Tuttu on Vapi
 │
 └── frontend/
     ├── index.html              ← Web UI (Vapi Web SDK embedded)
@@ -151,7 +151,7 @@ vapi-guide/
 | Time | Action |
 |---|---|
 | 0:00 | *"New devs read docs for hours. We think they should just ask."* |
-| 0:40 | Show web UI — glowing orb, click **Talk to Sage** |
+| 0:40 | Show web UI — glowing orb, click **Talk to Tuttu** |
 | 1:10 | Ask: *"What is Vapi and how does it work?"* |
 | 2:00 | Ask: *"How do I create my first assistant?"* |
 | 2:50 | Ask: *"What voices does Cartesia Sonic support?"* |

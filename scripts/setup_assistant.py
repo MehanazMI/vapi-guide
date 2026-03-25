@@ -1,13 +1,13 @@
 """
-setup_assistant.py — Creates VapiGuide AI (Sage) on Vapi.
+setup_assistant.py — Creates VapiGuide AI (Tuttu) on Vapi.
 
 Steps:
   1. Uploads all knowledge/*.md files to Vapi Files API
-  2. Creates the Sage assistant with those file IDs (Vapi auto-creates a RAG query tool)
+  2. Creates the Tuttu assistant with those file IDs (Vapi auto-creates a RAG query tool)
   3. Saves VAPI_ASSISTANT_ID to .env
   4. Prints the public key + assistant ID to paste into frontend/app.js
 
-Usage:
+UTuttu:
     python scripts/setup_assistant.py
 
 Requirements:
@@ -56,7 +56,7 @@ KNOWLEDGE_DIR = ROOT / "knowledge"
 # System prompt
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are Sage, a friendly and knowledgeable Vapi developer advocate for VapiGuide AI.
+SYSTEM_PROMPT = """You are Tuttu, a friendly and knowledgeable Vapi developer advocate for VapiGuide AI.
 
 Your role is to help new developers quickly get started with Vapi — the developer platform for building voice AI agents.
 
@@ -121,22 +121,22 @@ def upload_knowledge_base() -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# Step 2: Create the Sage assistant
+# Step 2: Create the Tuttu assistant
 # ---------------------------------------------------------------------------
 
 def create_assistant(file_ids: list[str]) -> dict:
-    """Create the VapiGuide AI (Sage) assistant with knowledge base."""
-    print("🤖 Creating VapiGuide AI (Sage) on Vapi...")
+    """Create the VapiGuide AI (Tuttu) assistant with knowledge base."""
+    print("🤖 Creating VapiGuide AI (Tuttu) on Vapi...")
 
     payload = {
-        "name": "VapiGuide AI — Sage",
-        "firstMessage": "Hey! I'm Sage — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you.",
-        "firstMessageMode": "assistant-speaks-first",
+        "name": "VapiGuide AI — Tuttu",
+        "firstMesTuttu": "Hey! I'm Tuttu — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you.",
+        "firstMesTuttuMode": "assistant-speaks-first",
         "model": {
             "provider": "openai",
             "model": "gpt-4.1",
             "temperature": 0.3,
-            "messages": [{"role": "system", "content": SYSTEM_PROMPT}],
+            "mesTuttus": [{"role": "system", "content": SYSTEM_PROMPT}],
             "knowledgeBase": {
                 "provider": "canonical",
                 "fileIds": file_ids,
@@ -151,7 +151,7 @@ def create_assistant(file_ids: list[str]) -> dict:
             "model": "nova-3",
             "language": "en",
         },
-        "endCallMessage": "Happy building! Reach out anytime you have more Vapi questions.",
+        "endCallMesTuttu": "Happy building! Reach out anytime you have more Vapi questions.",
         "endCallPhrases": ["goodbye", "thanks bye", "that's all", "i'm done", "bye"],
         "silenceTimeoutSeconds": 30,
         "maxDurationSeconds": 600,
@@ -228,7 +228,7 @@ def main():
 
     # 4. Print results
     print("\n" + "=" * 60)
-    print("✅  Sage is live!")
+    print("✅  Tuttu is live!")
     print("=" * 60)
     print(f"  Assistant ID:  {assistant_id}")
     print(f"  Public Key:    {VAPI_PUBLIC_KEY}")

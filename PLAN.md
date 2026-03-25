@@ -20,7 +20,7 @@ VapiGuide AI is a voice-first developer assistant that helps new users onboard t
 | 1 | `agents.md` — agent design doc | ✅ Done |
 | 2 | `PLAN.md` — this file | ✅ Done |
 | 3 | `knowledge/*.md` — 8 KB files | 🔄 In progress |
-| 4 | `scripts/setup_assistant.py` — create Sage on Vapi | ⬜ Todo |
+| 4 | `scripts/setup_assistant.py` — create Tuttu on Vapi | ⬜ Todo |
 | 5 | `frontend/index.html` + `style.css` + `app.js` — web UI | ⬜ Todo |
 | 6 | `README.md` — setup guide | ⬜ Todo |
 
@@ -65,12 +65,12 @@ Vapi Platform
 
 ---
 
-## Agent Config (Sage)
+## Agent Config (Tuttu)
 
 ```json
 {
-  "name": "VapiGuide AI — Sage",
-  "firstMessage": "Hey! I'm Sage — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you.",
+  "name": "VapiGuide AI — Tuttu",
+  "firstMesTuttu": "Hey! I'm Tuttu — your voice guide to Vapi. Ask me anything about building voice agents — getting started, code examples, pricing. I've got you.",
   "model": {
     "provider": "openai",
     "model": "gpt-4.1",
@@ -94,8 +94,8 @@ Vapi Platform
 
 ## Frontend UI Features
 
-- **Animated voice orb** — pulses when Sage is speaking
-- **Live transcript** — user and agent messages in real time
+- **Animated voice orb** — pulses when Tuttu is speaking
+- **Live transcript** — user and agent mesTuttus in real time
 - **Quick-question chips** — one-tap prompts to start the conversation:
   - *"How do I create my first assistant?"*
   - *"What voices does Cartesia Sonic support?"*
@@ -112,7 +112,7 @@ Vapi Platform
 # 1. Install Python deps
 pip install requests python-dotenv
 
-# 2. Create Sage on Vapi and upload knowledge base
+# 2. Create Tuttu on Vapi and upload knowledge base
 python scripts/setup_assistant.py
 
 # 3. Open frontend in browser — no server needed

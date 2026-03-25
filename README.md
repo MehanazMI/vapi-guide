@@ -9,7 +9,7 @@ A voice-first AI guide that helps new developers build with Vapi — through nat
 
 ## What is this?
 
-Talk to **Sage** — a voice AI agent that answers any question about Vapi, in real time, by voice. Ask about quickstarts, tools, webhooks, pricing, the Web SDK, and more. The meta twist: Sage is *built with Vapi*, making it a live demo of what it teaches.
+Talk to **Tuttu** — a voice AI agent that answers any question about Vapi, in real time, by voice. Ask about quickstarts, tools, webhooks, pricing, the Web SDK, and more. The meta twist: Tuttu is *built with Vapi*, making it a live demo of what it teaches.
 
 ## Setup (2 steps)
 
@@ -30,7 +30,7 @@ cp .env.example .env
 | `VAPI_PUBLIC_KEY` | dashboard.vapi.ai → API Keys |
 | `CARTESIA_API_KEY` | play.cartesia.ai → API Keys (optional) |
 
-### Step 2: Create Sage on Vapi
+### Step 2: Create Tuttu on Vapi
 
 ```bash
 pip install requests python-dotenv
@@ -39,7 +39,7 @@ python scripts/setup_assistant.py
 
 This will:
 1. Upload all 8 knowledge base files to Vapi
-2. Create the Sage assistant with RAG enabled
+2. Create the Tuttu assistant with RAG enabled
 3. Print your `ASSISTANT_ID`
 
 ### Step 3: Open the frontend
@@ -53,10 +53,10 @@ Then open `frontend/index.html` directly in Chrome. No server needed!
 
 ---
 
-## Usage
+## UTuttu
 
 1. Open `frontend/index.html` in Chrome
-2. Click **Talk to Sage**
+2. Click **Talk to Tuttu**
 3. Ask anything about Vapi — or tap a quick-question chip
 
 **Example questions:**
@@ -88,7 +88,7 @@ vapi-guide/
 │   └── 08_faq.md
 │
 ├── scripts/
-│   └── setup_assistant.py      ← Creates Sage on Vapi (run once)
+│   └── setup_assistant.py      ← Creates Tuttu on Vapi (run once)
 │
 └── frontend/
     ├── index.html              ← Web UI — open directly in browser

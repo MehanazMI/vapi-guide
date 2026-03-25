@@ -104,7 +104,7 @@ function onCallStart() {
   callBtn.style.display = "none";
   endBtn.style.display  = "flex";
   setOrbState("active");
-  setStatus("Live — Sage is ready", "active");
+  setStatus("Live — Tuttu is ready", "active");
   startTimer();
 
   // Send pending chip
@@ -153,7 +153,7 @@ function addTranscriptBubble(role, text) {
   if (role === "user") {
     avatar.textContent = "🧑";
   } else {
-    avatar.innerHTML = `<img src="sage.png" alt="Sage" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;" />`;
+    avatar.innerHTML = `<img src="sage.png" alt="Tuttu" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;" />`;
   }
 
   const inner = document.createElement("div");
@@ -163,7 +163,7 @@ function addTranscriptBubble(role, text) {
 
   const label = document.createElement("div");
   label.className = "role-label";
-  label.textContent = role === "user" ? "You" : "Sage";
+  label.textContent = role === "user" ? "You" : "Tuttu";
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
@@ -232,7 +232,7 @@ clearBtn.addEventListener("click", () => {
   transcriptBox.innerHTML = `
     <div class="empty-state">
       <div class="icon">🎙️</div>
-      <p>Your conversation with Sage will appear here</p>
+      <p>Your conversation with Tuttu will appear here</p>
     </div>`;
   toolLog.innerHTML = `<div class="no-tools">Tool calls will appear here during the conversation</div>`;
 });
