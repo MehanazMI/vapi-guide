@@ -153,7 +153,7 @@ function addTranscriptBubble(role, text) {
   if (role === "user") {
     avatar.textContent = "🧑";
   } else {
-    avatar.innerHTML = `<img src="sage.png" alt="Tuttu" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;" />`;
+    avatar.innerHTML = `<img src="tuttu.png" alt="Tuttu" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:50%;" />`;
   }
 
   const inner = document.createElement("div");
