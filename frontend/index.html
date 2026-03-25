@@ -6,6 +6,12 @@
   <title>VapiGuide AI — Vapi, explained by Vapi</title>
   <meta name="description" content="Ask anything about building with Vapi — in real voice, in real time. A voice-first Vapi guide, built with Vapi." />
   <link rel="stylesheet" href="style.css" />
+  <!-- Load Vapi Web SDK via esm.sh (ESM-only package, no UMD build) -->
+  <script type="module">
+    import Vapi from 'https://esm.sh/@vapi-ai/web@2.5.2';
+    window.Vapi = Vapi;
+    document.dispatchEvent(new CustomEvent('vapi-loaded'));
+  </script>
 </head>
 <body>
 <div class="app">

@@ -37,12 +37,15 @@ let pendingChip  = null;  // chip text to send once call starts
 // Vapi SDK Loader (CDN)
 // ---------------------------------------------------------------------------
 function loadVapiSDK() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    // window.Vapi is set by the <script type="module"> in index.html
+    // which imports from esm.sh and fires 'vapi-loaded'
     if (window.Vapi) { resolve(); return; }
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.umd.js";
-    script.onload = resolve;
-    document.head.appendChild(script);
+    const timeout = setTimeout(() => reject(new Error("Vapi SDK load timeout")), 10000);
+    document.addEventListener('vapi-loaded', () => {
+      clearTimeout(timeout);
+      resolve();
+    }, { once: true });
   });
 }
 
@@ -50,7 +53,12 @@ function loadVapiSDK() {
 // Init
 // ---------------------------------------------------------------------------
 async function init() {
-  await loadVapiSDK();
+  try {
+    await loadVapiSDK();
+  } catch (e) {
+    setStatus("⚠ Failed to load Vapi SDK — check internet connection", "error");
+    return;
+  }
 
   if (!ASSISTANT_ID) {
     setStatus("⚠ Run setup_assistant.py first, then paste the ID in app.js", "error");
@@ -58,7 +66,15 @@ async function init() {
     return;
   }
 
-  vapi = new window.Vapi(VAPI_PUBLIC_KEY);
+  // Handle different UMD export shapes
+  const VapiClass = window.Vapi?.default ?? window.Vapi;
+  if (!VapiClass) {
+    setStatus("⚠ Vapi SDK not found — check console for errors", "error");
+    console.error("window.Vapi is:", window.Vapi);
+    return;
+  }
+
+  vapi = new VapiClass(VAPI_PUBLIC_KEY);
   bindEvents();
   setStatus("Ready — click to start", "idle");
 }
