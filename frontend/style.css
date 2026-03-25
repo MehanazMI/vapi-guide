@@ -84,7 +84,9 @@ header {
 .header-text h1 {
   font-size:1.2rem; font-weight:800; letter-spacing:-.02em;
   background:linear-gradient(to right, var(--purple-light), var(--teal));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 .header-text .tagline {
   font-size:0.75rem; color:var(--text-2); margin-top:1px; font-style:italic;
@@ -121,7 +123,9 @@ header {
   letter-spacing:-.03em;
   line-height:1.2;
   background:linear-gradient(135deg, #fff 0%, var(--purple-light) 50%, var(--teal) 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
   margin-bottom:14px;
 }
 .hero p {
@@ -218,9 +222,16 @@ main {
 
 /* Orb state: connecting */
 .orb-container.connecting .orb {
-  animation:spin 1.5s linear infinite;
-  border-color:rgba(124,58,237,0.6);
+  border-color:rgba(124,58,237,0.8);
   box-shadow:0 0 40px var(--purple-glow);
+  animation: pulse-border 1s ease-in-out infinite;
+}
+.orb-container.connecting .orb-ring {
+  border-color:rgba(124,58,237,0.5);
+  animation:spin 1.2s linear infinite;
+}
+.orb-container.connecting .orb-ring:nth-child(2) {
+  animation:spin 1.8s linear infinite reverse;
 }
 /* Orb state: active */
 .orb-container.active .orb {
@@ -383,6 +394,10 @@ footer span { color:var(--purple-light); }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
 /* ---------- Keyframes ---------- */
+@keyframes pulse-border {
+  0%,100% { box-shadow:0 0 40px var(--purple-glow); border-color:rgba(124,58,237,0.8); }
+  50%      { box-shadow:0 0 60px var(--purple-glow); border-color:rgba(124,58,237,1); }
+}
 @keyframes logo-glow {
   0%,100% { box-shadow:0 0 28px var(--purple-glow); }
   50%      { box-shadow:0 0 48px var(--purple-glow), 0 0 80px rgba(124,58,237,0.2); }
