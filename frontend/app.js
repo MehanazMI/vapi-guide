@@ -18,9 +18,12 @@ const transcriptBox = document.getElementById("transcript-box");
 const clearBtn      = document.getElementById("clear-btn");
 const toolLog       = document.getElementById("tool-log");
 const chips         = document.querySelectorAll(".chip");
+const waveform      = document.getElementById("waveform");
+const liveBadge     = document.getElementById("live-badge");
+const statDurationPill = document.getElementById("stat-duration-pill");
 
 // Stats
-const statCalls     = document.getElementById("stat-calls");
+const statCalls     = document.getElementById("stat-calls") || { textContent: '' };
 const statDuration  = document.getElementById("stat-duration");
 
 // ---------------------------------------------------------------------------
@@ -85,8 +88,8 @@ async function init() {
 function bindEvents() {
   vapi.on("call-start", onCallStart);
   vapi.on("call-end",   onCallEnd);
-  vapi.on("speech-start", () => setOrbState("speaking"));
-  vapi.on("speech-end",   () => setOrbState("active"));
+  vapi.on("speech-start", () => { setOrbState("speaking"); if (waveform) waveform.classList.add("active"); });
+  vapi.on("speech-end",   () => { setOrbState("active");   if (waveform) waveform.classList.remove("active"); });
   vapi.on("volume-level", onVolume);
   vapi.on("message",  onMessage);
   vapi.on("error",    onError);
@@ -121,6 +124,8 @@ function onCallStart() {
   endBtn.style.display  = "flex";
   setOrbState("active");
   setStatus("Live — Tuttu is ready", "active");
+  if (liveBadge) liveBadge.style.display = "flex";
+  if (statDurationPill) statDurationPill.style.display = "inline-flex";
   startTimer();
 
   // Send pending chip
@@ -139,6 +144,9 @@ function onCallEnd() {
   endBtn.style.display  = "none";
   setOrbState("idle");
   setStatus("Call ended — click to talk again", "idle");
+  if (liveBadge) liveBadge.style.display = "none";
+  if (statDurationPill) statDurationPill.style.display = "none";
+  if (waveform) waveform.classList.remove("active");
   stopTimer();
   addSystemMessage("Call ended");
 }

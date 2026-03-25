@@ -6,7 +6,6 @@
   <title>VapiGuide AI — Vapi, explained by Vapi</title>
   <meta name="description" content="Ask anything about building with Vapi — in real voice, in real time. A voice-first Vapi guide, built with Vapi." />
   <link rel="stylesheet" href="style.css" />
-  <!-- Load Vapi Web SDK via esm.sh (ESM-only package, no UMD build) -->
   <script type="module">
     import Vapi from 'https://esm.sh/@vapi-ai/web@2.5.2';
     window.Vapi = Vapi;
@@ -24,6 +23,9 @@
       <p class="tagline">"Vapi, explained by Vapi"</p>
     </div>
     <div class="header-right">
+      <div class="live-badge" id="live-badge" style="display:none">
+        <span class="live-dot"></span>LIVE
+      </div>
       <div class="badge">
         <span class="dot"></span>
         Cartesia Sonic-3
@@ -31,93 +33,97 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h2>Ask Vapi anything.<br>By voice.</h2>
-    <p>Tuttu is your AI guide to building voice agents with Vapi. No docs, no searching — just ask.</p>
-
-    <div class="chips" role="list" aria-label="Quick questions">
-      <button class="chip" data-question="What is Vapi and how does it work?" role="listitem">What is Vapi?</button>
-      <button class="chip" data-question="How do I create my first assistant?" role="listitem">Create first assistant</button>
-      <button class="chip" data-question="How do I add a tool to my assistant?" role="listitem">Add a tool</button>
-      <button class="chip" data-question="What voices does Cartesia Sonic support?" role="listitem">Cartesia voices</button>
-      <button class="chip" data-question="What is the pricing and free tier?" role="listitem">Pricing</button>
-      <button class="chip" data-question="How do I embed voice in my web app using the Web SDK?" role="listitem">Web SDK</button>
-    </div>
-  </section>
-
-  <!-- Main -->
+  <!-- Main layout: hero + panel side by side -->
   <main>
 
     <!-- Left: Call Panel -->
     <aside>
-      <!-- Call card -->
+      <!-- Portrait card — bigger, centered, the star of the show -->
       <div class="card call-panel">
-        <!-- Orb -->
         <div class="orb-container idle" id="orb-container">
           <div class="orb-ring"></div>
           <div class="orb-ring"></div>
+          <div class="orb-ring ring3"></div>
           <div class="orb" id="orb">
             <img src="tuttu.png" alt="Tuttu" class="orb-portrait" />
           </div>
         </div>
 
-        <!-- Agent info -->
+        <!-- Waveform (shown when speaking) -->
+        <div class="waveform" id="waveform">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
         <div class="agent-info">
           <h2>Tuttu</h2>
           <div class="role">Vapi Developer Advocate</div>
           <div id="status-label" class="idle">Ready — click to start</div>
         </div>
 
-        <!-- Buttons -->
         <button id="call-btn">🎙️ Talk to Tuttu</button>
         <button id="end-btn">⏹ End Call</button>
 
-        <!-- Stats -->
-        <div class="stats">
-          <div class="stat">
-            <div class="lbl">Calls</div>
-            <div class="val" id="stat-calls">0</div>
-          </div>
-          <div class="stat">
-            <div class="lbl">Duration</div>
-            <div class="val" id="stat-duration">00:00</div>
+        <div class="stat-row">
+          <div class="stat-pill" id="stat-duration-pill" style="display:none">
+            <span class="s-icon">⏱</span>
+            <span id="stat-duration">00:00</span>
           </div>
         </div>
       </div>
 
-      <!-- Tool log card -->
-      <div class="card" style="margin-top:16px;">
-        <h3>⚡ Tool Calls</h3>
+      <!-- Tool log -->
+      <div class="card tool-card" style="margin-top:14px;">
+        <h3>⚡ Live Tool Calls</h3>
         <div id="tool-log">
-          <div class="no-tools">Tool calls appear here during the call</div>
+          <div class="no-tools">KB lookups appear here in real time</div>
         </div>
       </div>
     </aside>
 
-    <!-- Right: Transcript -->
-    <div class="card">
-      <div class="transcript-header">
-        <h2>Conversation</h2>
-        <button id="clear-btn">Clear</button>
-      </div>
-      <div id="transcript-box">
-        <div class="empty-state">
-          <div class="icon">🎙️</div>
-          <p>Click <strong>Talk to Tuttu</strong> or tap a quick question to start</p>
+    <!-- Right: Hero + Transcript stacked -->
+    <div class="right-col">
+
+      <!-- Hero -->
+      <section class="hero">
+        <h2>Ask Vapi anything.<br><span class="accent">By voice.</span></h2>
+        <p>No docs. No searching. Just ask Tuttu — your live voice guide to Vapi.</p>
+        <div class="chips" role="list" aria-label="Quick questions">
+          <button class="chip" data-question="What is Vapi and how does it work?" role="listitem">💡 What is Vapi?</button>
+          <button class="chip" data-question="How do I create my first assistant?" role="listitem">🤖 Create assistant</button>
+          <button class="chip" data-question="How do I add a tool or webhook to my assistant?" role="listitem">🔧 Add a tool</button>
+          <button class="chip" data-question="What voices does Cartesia Sonic-3 support?" role="listitem">🎤 Cartesia voices</button>
+          <button class="chip" data-question="What is the pricing and free tier?" role="listitem">💰 Pricing</button>
+          <button class="chip" data-question="How do I embed voice in my web app using the Web SDK?" role="listitem">🌐 Web SDK</button>
+        </div>
+      </section>
+
+      <!-- Transcript -->
+      <div class="card transcript-card">
+        <div class="transcript-header">
+          <h2>Conversation</h2>
+          <button id="clear-btn">Clear</button>
+        </div>
+        <div id="transcript-box">
+          <div class="empty-state">
+            <div class="empty-hints">
+              <div class="hint-row">🎙️ <span>Click <strong>Talk to Tuttu</strong> or tap a chip above to start</span></div>
+              <div class="hint-row">💬 <span>Ask: <em>"What is Vapi and how does it work?"</em></span></div>
+              <div class="hint-row">🔊 <span>Powered by Cartesia Sonic-3 · ~40ms voice latency</span></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
+    </div><!-- .right-col -->
   </main>
 
   <!-- Footer -->
   <footer>
-    Built <span>with</span> Vapi · Powered by <span>Cartesia Sonic-3</span> · Hackathon 2026
+    Built <span>with</span> Vapi · Powered by <span>Cartesia Sonic-3</span> · Vapi × Cartesia Hackathon 2026
   </footer>
 
 </div>
-
 <script src="app.js"></script>
 </body>
 </html>
